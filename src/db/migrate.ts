@@ -3,6 +3,9 @@ import { migrate } from 'drizzle-orm/node-postgres/migrator';
 import { db, pool } from './index';
 
 async function main() {
+  if (!pool) {
+    throw new Error('pg pool is not initialized (embedded mode does not use pg.Pool)');
+  }
   const client = await pool.connect();
   try {
     await client.query('CREATE SCHEMA IF NOT EXISTS "openrab";');
@@ -31,10 +34,10 @@ async function main() {
 
 main()
   .then(async () => {
-    await pool.end();
+    await pool?.end();
   })
   .catch(async (err) => {
     console.error('Migration failed:', err);
-    await pool.end();
+    await pool?.end();
     process.exit(1);
   });

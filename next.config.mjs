@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverExternalPackages: ['pdfmake', 'exceljs', 'pg'],
+  output: 'standalone',
+  serverExternalPackages: ['pdfmake', 'exceljs', 'pg', '@electric-sql/pglite'],
 };
 
 export default nextConfig;

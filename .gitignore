@@ -14,3 +14,7 @@ out/
 *.tsbuildinfo
 next-env.d.ts
 coverage/
+
+# Desktop & embedded DB
+dist-desktop/
+.openrab-data/

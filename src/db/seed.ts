@@ -442,10 +442,10 @@ async function main() {
 
 main()
   .then(async () => {
-    await pool.end();
+    await pool?.end();
   })
   .catch(async (err) => {
     console.error('Seed failed:', err);
-    await pool.end();
+    await pool?.end();
     process.exit(1);
   });
