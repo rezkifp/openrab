@@ -1,10 +1,12 @@
 import { getProjectsList } from '@/app/actions/project';
+import { ensureDbReady } from '@/db';
 import { Navbar } from '@/components/Navbar';
 import { ProjectsListClient } from '@/components/workspace/ProjectsListClient';
 
 export const dynamic = 'force-dynamic';
 
 export default async function ProjectsPage() {
+  await ensureDbReady();
   const { projects, regions, hasDummy } = await getProjectsList();
 
   return (

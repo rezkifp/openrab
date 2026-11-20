@@ -8,4 +8,10 @@ exports.default = async function afterPack(context) {
     fs.cpSync(src, dest, { recursive: true });
     console.log('Copied standalone node_modules to:', dest);
   }
+  const drizzleSrc = path.join(context.packager.projectDir, 'drizzle');
+  const drizzleDest = path.join(context.appOutDir, 'resources', 'standalone', 'drizzle');
+  if (fs.existsSync(drizzleSrc)) {
+    fs.cpSync(drizzleSrc, drizzleDest, { recursive: true });
+    console.log('Copied drizzle migrations to:', drizzleDest);
+  }
 };

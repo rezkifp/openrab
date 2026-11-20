@@ -1,10 +1,12 @@
 import { getMasterDataBundle } from '@/app/actions/master';
+import { ensureDbReady } from '@/db';
 import { Navbar } from '@/components/Navbar';
 import { MasterDataClient } from '@/components/master/MasterDataClient';
 
 export const dynamic = 'force-dynamic';
 
 export default async function MasterPage() {
+  await ensureDbReady();
   const bundle = await getMasterDataBundle();
 
   return (

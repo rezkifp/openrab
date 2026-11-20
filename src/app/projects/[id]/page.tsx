@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getProjectWorkspace } from '@/app/actions/project';
+import { ensureDbReady } from '@/db';
 import { Navbar } from '@/components/Navbar';
 import { ProjectWorkspaceClient } from '@/components/workspace/ProjectWorkspaceClient';
 
@@ -10,6 +11,7 @@ export default async function ProjectWorkspacePage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  await ensureDbReady();
   const { id } = await params;
   const payload = await getProjectWorkspace(id);
 
