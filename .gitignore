@@ -18,3 +18,6 @@ coverage/
 # Desktop & embedded DB
 dist-desktop/
 .openrab-data/
+
+# Internal / preproduction docs
+DESIGN.md
