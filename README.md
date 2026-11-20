@@ -22,7 +22,7 @@
 
 ## Cara Pakai (Pilih Salah Satu)
 
-### Cara 1: Aplikasi Desktop Windows (`.exe`) — Paling Mudah
+### Cara 1: Aplikasi Desktop Windows (`.exe`) Paling Mudah
 Tidak perlu install Node.js, PostgreSQL, atau buka terminal sama sekali:
 1. Buka menu **Releases** di sebelah kanan halaman GitHub ini.
 2. Unduh file **`OpenRAB-Setup-1.2.0.exe`**.
@@ -34,8 +34,8 @@ Tidak perlu install Node.js, PostgreSQL, atau buka terminal sama sekali:
 
 #### 1. Siapkan 2 Aplikasi Pendukung (Gratis)
 Pastikan komputer Anda sudah terpasang:
-1. **Node.js** (versi 18 ke atas) — Unduh di [nodejs.org](https://nodejs.org) (pilih tombol **LTS**, lalu install seperti biasa).
-2. **PostgreSQL** (database lokal) — Unduh di [postgresql.org](https://www.postgresql.org/download/) (ingat *password* yang Anda buat saat proses instalasi).
+1. **Node.js** (versi 18 ke atas) Unduh di [nodejs.org](https://nodejs.org) (pilih tombol **LTS**, lalu install seperti biasa).
+2. **PostgreSQL** (database lokal) Unduh di [postgresql.org](https://www.postgresql.org/download/) (ingat *password* yang Anda buat saat proses instalasi).
 
 ### 2. Unduh Aplikasi OpenRAB
 - Klik tombol hijau **`<> Code`** di halaman GitHub ini, lalu pilih **`Download ZIP`**.
