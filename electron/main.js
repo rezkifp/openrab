@@ -100,6 +100,7 @@ async function createWindow() {
     minWidth: 1024,
     minHeight: 700,
     title: 'OpenRAB — Aplikasi Penyusun RAB & BoQ',
+    icon: path.join(__dirname, 'icon.png'),
     autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: false,
