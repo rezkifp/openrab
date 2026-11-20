@@ -18,7 +18,7 @@ function waitForServer(url, timeoutMs = 30000) {
         })
         .on('error', () => {
           if (Date.now() - start > timeoutMs) {
-            reject(new Error('Server timeout'));
+            reject(new Error('Server tidak merespons dalam 30 detik.'));
           } else {
             setTimeout(check, 300);
           }
@@ -26,6 +26,31 @@ function waitForServer(url, timeoutMs = 30000) {
     };
     check();
   });
+}
+
+function showStatusHtml(title, message) {
+  if (!mainWindow || mainWindow.isDestroyed()) return;
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8" />
+        <style>
+          body { font-family: system-ui, sans-serif; background: #fafaf9; color: #1c1917; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+          .box { max-width: 480px; padding: 32px; background: #fff; border: 1px solid #d6d3d1; border-radius: 8px; text-align: center; }
+          h2 { margin: 0 0 8px; font-size: 18px; }
+          p { margin: 0; font-size: 13px; color: #57534e; white-space: pre-wrap; }
+        </style>
+      </head>
+      <body>
+        <div class="box">
+          <h2>${title}</h2>
+          <p>${message}</p>
+        </div>
+      </body>
+    </html>
+  `;
+  mainWindow.loadURL('data:text/html;charset=utf-8,' + encodeURIComponent(html));
 }
 
 function startNextServer() {
@@ -36,6 +61,8 @@ function startNextServer() {
 
   const serverScript = path.join(standaloneDir, 'server.js');
   const dataDir = path.join(app.getPath('userData'), 'openrab-data');
+
+  let stderrLog = '';
 
   serverProcess = spawn(process.execPath, [serverScript], {
     cwd: standaloneDir,
@@ -48,15 +75,25 @@ function startNextServer() {
       OPENRAB_DATA_DIR: dataDir,
       NODE_ENV: 'production',
     },
-    stdio: 'inherit',
+    stdio: ['ignore', 'pipe', 'pipe'],
+  });
+
+  serverProcess.stderr?.on('data', (chunk) => {
+    stderrLog += chunk.toString();
+  });
+
+  serverProcess.on('error', (err) => {
+    showStatusHtml('Gagal Menyalakan Server', err.message);
+  });
+
+  serverProcess.on('exit', (code) => {
+    if (code !== 0 && code !== null) {
+      showStatusHtml('Server Berhenti (Exit ' + code + ')', stderrLog || 'Terjadi kesalahan internal.');
+    }
   });
 }
 
 async function createWindow() {
-  startNextServer();
-  const url = `http://127.0.0.1:${PORT}`;
-  await waitForServer(url);
-
   mainWindow = new BrowserWindow({
     width: 1400,
     height: 900,
@@ -70,10 +107,22 @@ async function createWindow() {
     },
   });
 
-  await mainWindow.loadURL(url);
+  showStatusHtml('Mempersiapkan OpenRAB...', 'Sedang menyalakan database lokal dan server aplikasi...');
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  startNextServer();
+  const url = `http://127.0.0.1:${PORT}`;
+  try {
+    await waitForServer(url);
+    if (mainWindow && !mainWindow.isDestroyed()) {
+      await mainWindow.loadURL(url);
+    }
+  } catch (err) {
+    showStatusHtml('Gagal Membuka OpenRAB', err.message);
+  }
 }
 
 app.whenReady().then(createWindow);

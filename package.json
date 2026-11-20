@@ -63,6 +63,7 @@
     "directories": {
       "output": "dist-desktop"
     },
+    "afterPack": "electron/afterPack.js",
     "files": [
       "electron/**/*",
       "package.json"
@@ -70,7 +71,11 @@
     "extraResources": [
       {
         "from": ".next/standalone",
-        "to": "standalone"
+        "to": "standalone",
+        "filter": [
+          "**/*",
+          "node_modules/**/*"
+        ]
       },
       {
         "from": ".next/static",
@@ -79,6 +84,10 @@
     ],
     "win": {
       "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     }
   }
 }
