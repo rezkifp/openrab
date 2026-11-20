@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-canvas: #f8f7f4;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f1efea;
+  --ink-primary: #0f172a;
+  --ink-secondary: #475569;
+  --border-grid: #ddd9d0;
+  --accent-draft: #b45309;
+  --accent-locked: #047857;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--ink-primary);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
