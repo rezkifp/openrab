@@ -47,17 +47,23 @@ function normalizeDecimalString(
 }
 
 export async function getMasterDataBundle() {
-  const [regionRows, resourceRows, priceRows, ahspRows, compRows] =
-    await Promise.all([
-      db.select().from(regions).orderBy(asc(regions.name)),
-      db.select().from(masterResources).orderBy(asc(masterResources.code)),
-      db
-        .select()
-        .from(resourcePrices)
-        .orderBy(desc(resourcePrices.effectiveDate)),
-      db.select().from(masterAhsp).orderBy(asc(masterAhsp.code)),
-      db.select().from(ahspCompositions).orderBy(asc(ahspCompositions.createdAt)),
-    ]);
+  const regionRows = await db.select().from(regions).orderBy(asc(regions.name));
+  const resourceRows = await db
+    .select()
+    .from(masterResources)
+    .orderBy(asc(masterResources.code));
+  const priceRows = await db
+    .select()
+    .from(resourcePrices)
+    .orderBy(desc(resourcePrices.effectiveDate));
+  const ahspRows = await db
+    .select()
+    .from(masterAhsp)
+    .orderBy(asc(masterAhsp.code));
+  const compRows = await db
+    .select()
+    .from(ahspCompositions)
+    .orderBy(asc(ahspCompositions.createdAt));
 
   const hasDummy = hasAnyDummyMarker([
     ...regionRows.filter((r) => r.isActive).map((r) => r.name),
