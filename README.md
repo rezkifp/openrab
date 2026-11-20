@@ -55,13 +55,11 @@ npm run db:seed
 > - `npm run db:seed`: Mengisi data master harga material, upah, dan resep AHSP SNI awal.
 
 ### 5. Mulai Gunakan OpenRAB
-Ketik perintah berikut di Terminal:
+**Cara Paling Mudah (Tanpa Terminal):**
+- Cukup **klik 2x (double-click)** file **`Buka-OpenRAB.bat`** di dalam folder `OpenRAB`.
+- Aplikasi akan menyala dan browser otomatis terbuka di **http://localhost:3000**.
 
-```bash
-npm run dev
-```
-Setelah muncul tulisan `Ready`, buka browser (Chrome/Edge) dan kunjungi alamat:
-👉 **http://localhost:3000**
+*(Atau jika lewat Terminal, ketik `npm run dev` lalu buka http://localhost:3000).*
 
 ---
 
