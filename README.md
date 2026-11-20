@@ -1,4 +1,4 @@
-# OpenRAB — Aplikasi Penyusun RAB & BoQ Arsitektur
+# OpenRAB, Aplikasi Penyusun RAB & BoQ Arsitektur
 
 **OpenRAB** adalah aplikasi penyusun **Rencana Anggaran Biaya (RAB)**, **Bill of Materials (BOM)**, **Kurva S**, dan **Berita Acara Pekerjaan Tambah Kurang (BAPTK)** yang dirancang khusus untuk **Arsitek, Quantity Surveyor (QS), dan Kontraktor** agar dapat bekerja cepat, akurat, dan rapi di komputer lokal Anda sendiri.
 
